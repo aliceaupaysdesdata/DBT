@@ -2,16 +2,21 @@ version: 2
 
 models:
     - name: stg_orders
+      description: Order data with basic cleaning and transformation applied.
       columns:
         - name: order_id
+          description: A unique identifier for each order placed by a customer.
           tests:
             - not_null
             - unique
         - name: customer_id
+          description: The identifier for the customer who placed the order. This links to the `customer_id` column in the `stg_customers` table.
           tests:
             - not_null
             - relationships: 
                 to: ref('stg_customers')
                 field: customer_id
         - name: order_date
+          description: The date when the order was placed. Typically used for analysis of order trends and periods.
         - name: store_id
+          description: "{{ doc('store_id_description') }}"
